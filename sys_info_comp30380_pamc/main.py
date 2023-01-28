@@ -20,7 +20,7 @@ def systeminfo():
     num_cpus = os.cpu_count()
 
     # Get amount of memory
-    memory = psutil.virtual_memory()  #.total / (1024.0 ** 3)
+    memory = round(psutil.virtual_memory().total / (1024.0 ** 3),2)
 
     # Get IP address
     ip_address = socket.gethostbyname(socket.gethostname())
