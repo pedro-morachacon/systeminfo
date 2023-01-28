@@ -1,44 +1,56 @@
-import psutil
-import os
-import platform
-import socket
 
-# Get machine name
-machine_name = socket.gethostname()
+def systeminfo():
+    import psutil
+    import os
+    import platform
+    import socket
+    import timeit 
+    import math 
+    
+    # Get machine name
+    machine_name = socket.gethostname()
 
-# Get operating system name
-os_name = platform.system()
+    # Get operating system name
+    os_name = platform.system()
 
-# Get operating system version
-os_version = platform.release()
+    # Get operating system version
+    os_version = platform.release()
 
-# Get number of CPU's
-num_cpus = os.cpu_count()
+    # Get number of CPU's
+    num_cpus = os.cpu_count()
 
-# Get amount of memory
-memory = psutil.virtual_memory()  #.total / (1024.0 ** 3)
+    # Get amount of memory
+    memory = psutil.virtual_memory()  #.total / (1024.0 ** 3)
 
-# Get IP address
-ip_address = socket.gethostbyname(socket.gethostname())
+    # Get IP address
+    ip_address = socket.gethostbyname(socket.gethostname())
 
-# Print the #1 to 6 information
-print("1. Machine Name: ", machine_name)
-print("2. Operating System: ", os_name)
-print("3. Operating System Version: ", os_version)
-print("4. Number of CPU's: ", num_cpus)
-print("5. Amount of Memory:", memory, "GB")
-print("6. IP Address: ", ip_address)
+    # Add the #1 to 6 information to variable
+    sysinfo = ""
+    sysinfo += "1. Machine Name: " + machine_name + "\n"
+    sysinfo += "2. Operating System: " + os_name + "\n"
+    sysinfo += "3. Operating System Version: " + os_version + "\n"
+    sysinfo += "4. Number of CPU's: " + num_cpus + "\n"
+    sysinfo += "5. Amount of Memory:" + memory + "GB" + "\n"
+    sysinfo += "6. IP Address: " + ip_address + "\n"
 
-# For #7 information using the sample code 1 at page 5 of the practical slides 
-import timeit 
-import math 
-import itertools
+    # For #7 information using the sample code 1 at page 5 of the practical slides 
+
+    t_default = 6.388216104
+    start_time = timeit.default_timer()
+    bench_pidigits(ndigits=1000, loops=100)
+    elapsed_time = timeit.default_timer() - start_time
+    sysinfo += '7. CPU strength score(relative elapsed):' + round(elapsed_time/t_default,3) + "\n"
+    return sysinfo
+
 
 def bench_pidigits(ndigits=1000, loops=100):
 
 	def calc_ndigits(n) :
 		# Adapted from code on http://shootout.alioth.debian.org/
+		import itertools
 		def gen_x() :
+			import itertools
 			return map(lambda k: (k, 4*k + 2, 0, 2*k + 1), itertools.count(1)) 
 
 		def compose(a, b):
@@ -73,10 +85,3 @@ def bench_pidigits(ndigits=1000, loops=100):
 
 	#return perf.perf_counter() - to
 
-if __name__ == '__main__':
-	t_default = 6.388216104
-	start_time = timeit.default_timer()
-	bench_pidigits(ndigits=1000, loops=100)
-	elapsed_time = timeit.default_timer() - start_time
-	print('7. CPU strength score(relative elapsed):', elapsed_time/t_default)
-print()
