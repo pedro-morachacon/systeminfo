@@ -30,9 +30,9 @@ def systeminfo():
     sysinfo += "1. Machine Name: " + machine_name + "\n"
     sysinfo += "2. Operating System: " + os_name + "\n"
     sysinfo += "3. Operating System Version: " + os_version + "\n"
-    sysinfo += "4. Number of CPU's: " + num_cpus + "\n"
-    sysinfo += "5. Amount of Memory:" + memory + "GB" + "\n"
-    sysinfo += "6. IP Address: " + ip_address + "\n"
+    sysinfo += "4. Number of CPU's: " + str(num_cpus) + "\n"
+    sysinfo += "5. Amount of Memory:" + str(memory) + "GB" + "\n"
+    sysinfo += "6. IP Address: " + str(ip_address) + "\n"
 
     # For #7 information using the sample code 1 at page 5 of the practical slides 
 
@@ -40,7 +40,7 @@ def systeminfo():
     start_time = timeit.default_timer()
     bench_pidigits(ndigits=1000, loops=100)
     elapsed_time = timeit.default_timer() - start_time
-    sysinfo += '7. CPU strength score(relative elapsed):' + round(elapsed_time/t_default,3) + "\n"
+    sysinfo += '7. CPU strength score(relative elapsed):' + str(round(elapsed_time/t_default,3)) + "\n"
     return sysinfo
 
 
