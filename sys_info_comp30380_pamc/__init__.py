@@ -1,1 +1,1 @@
-from .main import systeminfo
+import .main

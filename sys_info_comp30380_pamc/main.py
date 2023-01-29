@@ -1,5 +1,5 @@
 
-def systeminfo():
+if __name__ == '__main__':
     import psutil
     import os
     import platform
