@@ -81,5 +81,5 @@ def sys_info() :
     bench_pidigits(ndigits=1000, loops=100)
     elapsed_time = timeit.default_timer() - start_time
     sysinfo += '7. CPU strength score(relative elapsed):' + str(round(elapsed_time/t_default,3)) + "\n"
-    if __name__ == 'main':
+    if __name__ == '__init__':
         print(sysinfo) 
